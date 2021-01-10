@@ -5,6 +5,7 @@ const users = require('./routes/user');
 const albums = require('./routes/album');
 const photos = require('./routes/photo')
 const cors = require('cors');
+const path = require('path');
 
 app.use(cors());
 app.use(express.json());
@@ -12,6 +13,8 @@ app.use('/users', users);
 app.use('/albums', albums);
 app.use('/photos', photos);
 
+// app.use(express.static(__dirname + '/public'));
+app.use('/public', express.static('public'));
 
 mongoose.connect('mongodb://localhost/nodeDB', {
         useCreateIndex: true,

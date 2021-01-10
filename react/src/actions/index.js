@@ -42,7 +42,11 @@ export const addUserAlbum = (obj) => async (dispatch) => {
 };
 export const addPhoto = (data) => async (dispatch) => {
   console.log(data)
-  const { data : newPhoto } = await axios.post("http://localhost:3000/photos", data);
+  const { data : newPhoto } = await axios.post("http://localhost:3000/photos", data , {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
   dispatch({
     type: 'ADD_PHOTO',
     payload : newPhoto
