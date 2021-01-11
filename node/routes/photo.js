@@ -63,12 +63,12 @@ var upload = multer({
         }
     }
 });
-router.post('/', upload.single('url'), (req, res, next) => {
+router.post('/', upload.single('url'), async (req, res, next) => {
     const link = req.protocol + '://' + req.get('host')
     const photo = new Photo({
         url : link + '/public/' + req.file.filename
     });
-    photo.save().then(result => {
+    await photo.save().then(result => {
         res.status(201).json({
             message: "Upload successfully!",
             userCreated: {

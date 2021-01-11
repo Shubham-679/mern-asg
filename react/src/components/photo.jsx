@@ -28,6 +28,7 @@ const Photo = () => {
     const data = new FormData()
     data.append('url', image)
     dispatch(addPhoto(data))
+    window.location.reload();
   }
 
 
