@@ -7,7 +7,7 @@ const multer = require("multer");
 // get all photos 
 
 router.get('/', async (req, res) => {
-    const photo = await Photo.find({});
+    const photo = await Photo.find();
     res.send(photo);
 })
 
@@ -68,20 +68,8 @@ router.post('/', upload.single('url'), async (req, res, next) => {
     const photo = new Photo({
         url : link + '/public/' + req.file.filename
     });
-    await photo.save().then(result => {
-        res.status(201).json({
-            message: "Upload successfully!",
-            userCreated: {
-                _id: result._id,
-                url : result.url
-            }
-        })
-    }).catch(err => {
-        console.log(err),
-            res.status(500).json({
-                error: err
-            });
-    })
+    const savedphoto = await photo.save();
+    res.send(savedphoto)
 })
 
 

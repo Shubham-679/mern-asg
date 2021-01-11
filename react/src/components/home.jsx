@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const Home = (props) => {
   const users = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  let addNewAlbum = React.createRef()
+  let addNewAlbum = React.createRef();
 
   useEffect(() => {
     dispatch(getuser());
@@ -29,12 +29,12 @@ const Home = (props) => {
     addNewAlbum = "";
   }
 
+
   return (
     <div>
       <div>
-        <h1>Users Details</h1>
       </div>
-      <div>
+      <div className="m-2">
         <table className="table">
           <thead>
             <tr>
