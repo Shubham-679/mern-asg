@@ -1,9 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getuser, addUserAlbum } from "../actions/index";
+import { getuser, addUser, addUserAlbum } from "../actions/index";
 import { Link } from 'react-router-dom';
 
+
+const initialValues = {
+  name: "",
+  username: "",
+  email: "",
+  address: "",
+  phone: "",
+};
+
 const Home = (props) => {
+  const [values, setValues] = useState(initialValues);
   const users = useSelector((state) => state.user);
   const dispatch = useDispatch();
   let addNewAlbum = React.createRef();
@@ -11,8 +21,6 @@ const Home = (props) => {
   useEffect(() => {
     dispatch(getuser());
   }, [dispatch]);
-
- 
 
   const handleChange = (e) => {
     addNewAlbum = e.target.value;
@@ -29,10 +37,54 @@ const Home = (props) => {
     addNewAlbum = "";
   }
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addUser(values));
+  }
 
   return (
     <div>
-      <div>
+      <div className="container">
+      <form onSubmit={handleSubmit}>
+          <input
+            value={values.name}
+            onChange={handleInputChange}
+            name="name"
+            placeholder="Name"         
+            />
+          <input
+            value={values.username}
+            onChange={handleInputChange}
+            name="username"
+            placeholder="UserName"
+          />
+          <input
+            value={values.email}
+            onChange={handleInputChange}
+            name="email"
+            placeholder="Email"
+          />
+          <input
+            value={values.address}
+            onChange={handleInputChange}
+            name="address"
+            placeholder="Address"
+          />
+          <input
+            value={values.phone}
+            onChange={handleInputChange}
+            name="phone"
+            placeholder="Phone"
+          />
+          <button className="btn-sm btn-primary m-2" type="submit" > Submit </button>
+        </form> 
       </div>
       <div className="m-2">
         <table className="table">

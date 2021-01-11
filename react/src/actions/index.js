@@ -32,6 +32,14 @@ export const addAlbum = (text) => async (dispatch) => {
     payload : newAlbum
   });
 };
+
+export const addUser = (data) => async (dispatch) => {
+  const { data : newUser } = await axios.post("http://localhost:3000/users",data);
+  dispatch({
+    type: 'ADD_USER',
+    payload : newUser
+  });
+};
 export const addUserAlbum = (obj) => async (dispatch) => {
   const { data : newAlbum } = await axios.post("http://localhost:3000/albums/"+obj.user,obj);
   console.log(newAlbum);
